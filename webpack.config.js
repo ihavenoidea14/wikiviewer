@@ -1,12 +1,6 @@
 const path = require('path');
 
 module.exports = {
-  devServer: {
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-      "Access-Control-Allow-Methods": "GET"
-    }
-  },
   entry: './index.js',
   output: {
     filename: './dist/bundle.js'

@@ -28,14 +28,13 @@ export default class Main extends React.Component {
         articles: [...this.stripTags(query.search)]
       });
     } else {
-      let {data} = await axios.get(`https://en.wikipedia.org/w/api.php?action=query&format=json&list=random&utf8=1&rnnamespace=0&rnlimit=1origin=*`);
+      let res = await axios.get(`https://en.wikipedia.org/w/api.php?action=query&format=json&list=random&utf8=1&rnnamespace=0&rnlimit=1&origin=*`);
+      let article = encodeURIComponent(res.data.query.random[0].title);
+      let {data} = await axios.get(`https://en.wikipedia.org/w/api.php?action=query&format=json&list=search&srsearch=${article}&srnamespace=0&srqiprofile=classic&srprop=snippet&origin=*`);
       let {query} = data;
-      let article = query.random[0].title;
-      let {realData} = await await axios.get(`https://en.wikipedia.org/w/api.php?action=query&format=json&list=search&srsearch=${article}&srnamespace=0&srqiprofile=classic&srprop=snippet&origin=*`);
-      let {realQuery} = realData;
 
       this.setState({
-        articles: [...this.stripTags(realQuery.search)]
+        articles: [...this.stripTags(query.search)]
       });     
     }
   }
@@ -51,6 +50,10 @@ export default class Main extends React.Component {
       <div className='container'>
         <div className = 'title'>
           <h1>Wikipedia Viewer</h1>
+          <h4>{'{'} Jarid Wade {'}'}</h4>
+          <a className='fa fa-github fa-lg' href='https://github.com/ihavenoidea14' target='_blank'/>
+          <a className='fa fa-free-code-camp fa-lg' href='https://www.freecodecamp.org/ihavenoidea14' target='_blank'/>
+          <a className='fa fa-linkedin fa-lg' href='https://www.linkedin.com/in/jarid-wade-154a1373/' target='_blank'/>
         </div>
         <div className='form'>
           <div className='input pad'>
