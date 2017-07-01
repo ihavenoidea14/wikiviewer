@@ -5,3 +5,4 @@ before_script:
   - npm install -g webpack ava
 script:
   - webpack
+  - yarn build
